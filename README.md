@@ -2,4 +2,4 @@
 Team job related networking (members, project name, project url)
 
 ## Live
-https://constantinraulivan.github.io/teams-networking/
+[Demo](https://constantinraulivan.github.io/teams-networking/)
