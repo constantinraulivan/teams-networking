@@ -1,0 +1,19 @@
+table {
+  width: 100%;
+}
+
+table thead th {
+  width: 800px;
+  background-color: blue;
+  height: 35px;
+  color: white;
+}
+
+table tbody tr {
+  height: 50px;
+  background-color: rgb(172, 172, 175);
+}
+
+table {
+  margin-top: 20px;
+}
