@@ -1,4 +1,4 @@
-function geatTeamHTML(team) {
+function getTeamHTML(team) {
   return `  <tr>
   <td>${team.promotion}</td>
   <td>${team.members}</td>
@@ -11,17 +11,7 @@ function geatTeamHTML(team) {
 }
 
 function displayTeams(teams) {
-  // transforma din json in html
-  // var teamsHTML = "";
-  // teams.forEach(function (team) {
-  //   teamsHTML += geatTeamHTML(team);
-  // });
-
-  var teamsHTML = teams.map(function (team) {
-    return geatTeamHTML(team);
-  });
-  console.warn("teamsHTML", teamsHTML);
-
+  var teamsHTML = teams.map(getTeamHTML);
   //afisare
   document.querySelector("table tbody").innerHTML = teamsHTML.join("");
 }
