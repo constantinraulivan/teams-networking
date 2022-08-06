@@ -12,13 +12,18 @@ function geatTeamHTML(team) {
 
 function displayTeams(teams) {
   // transforma din json in html
-  var teamsHTML = "";
-  teams.forEach(function (team) {
-    teamsHTML += geatTeamHTML(team);
+  // var teamsHTML = "";
+  // teams.forEach(function (team) {
+  //   teamsHTML += geatTeamHTML(team);
+  // });
+
+  var teamsHTML = teams.map(function (team) {
+    return geatTeamHTML(team);
   });
+  console.warn("teamsHTML", teamsHTML);
 
   //afisare
-  document.querySelector("table tbody").innerHTML = teamsHTML;
+  document.querySelector("table tbody").innerHTML = teamsHTML.join("");
 }
 
 function loadTeams() {
