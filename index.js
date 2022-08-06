@@ -1,16 +1,20 @@
+function geatTeamHTML(team) {
+  return `  <tr>
+  <td>${team.promotion}</td>
+  <td>${team.members}</td>
+  <td>${team.name}</td>
+  <td>
+    <a href="${team.url}">open</a>
+  </td>
+  <td></td>
+</tr>`;
+}
+
 function displayTeams(teams) {
   // transforma din json in html
   var teamsHTML = "";
   teams.forEach(function (team) {
-    teamsHTML += `  <tr>
-    <td>${team.promotion}</td>
-    <td>${team.members}</td>
-    <td>${team.name}</td>
-    <td>
-      <a href="${team.url}">open</a>
-    </td>
-    <td></td>
-  </tr>`;
+    teamsHTML += geatTeamHTML(team);
   });
 
   //afisare
