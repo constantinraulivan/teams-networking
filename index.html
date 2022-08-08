@@ -14,51 +14,55 @@
       <input type="search" / name="search-bar" id="search-bar"
       placeholder="Search here">
     </div>
-    <table>
-      <thead>
-        <tr>
-          <th>Promotion</th>
-          <th>Members</th>
-          <th>Project Name</th>
-          <th>Project URL</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>FastTrackIT</td>
-          <td>Nicolae Matei, Andrei Ilie</td>
-          <td>Teams Networking</td>
-          <td>
-            <a href="https://github.com/constantinraulivan/">link</a>
-          </td>
-          <td></td>
-        </tr>
-        <tr>
-          <td>2021-won1</td>
-          <td>Coman Oana, Adina Bîlc, Bianca Vesa</td>
-          <td>Medical Inventory store</td>
-          <td>link 2</td>
-          <td></td>
-        </tr>
-        <tr>
-          <td>2021-won1</td>
-          <td>Coman Oana, Adina Bîlc, Bianca Vesa</td>
-          <td>Medical Inventory store</td>
-          <td>link 2</td>
-          <td></td>
-        </tr>
-      </tbody>
-      <tfoot>
-        <tr>
-          <th><input type="text" placeholder="Enter Group" /></th>
-          <th><input type="text" placeholder="Enter Members" /></th>
-          <th><input type="text" placeholder="Enter Projects" /></th>
-          <th><input type="text" placeholder="project URL" /></th>
-          <th><input type="button" placeholder="" /></th>
-        </tr>
-      </tfoot>
-    </table>
+    <form action="" method="post" id="editForm">
+      <table>
+        <thead>
+          <tr>
+            <th>Promotion</th>
+            <th>Members</th>
+            <th>Project Name</th>
+            <th>Project URL</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+        <tfoot>
+          <tr>
+            <td>
+              <input
+                type="text"
+                placeholder="Enter Group"
+                name="promotion"
+                required
+              />
+            </td>
+
+            <td>
+              <input
+                type="text"
+                placeholder="Enter Members"
+                name="members"
+                required
+              />
+            </td>
+
+            <td>
+              <input
+                type="text"
+                placeholder="Enter Name"
+                name="name"
+                required
+              />
+            </td>
+
+            <td>
+              <input type="text" placeholder="Enter URL" name="url" required />
+            </td>
+            <td><button type="submit">💾</button></td>
+          </tr>
+        </tfoot>
+      </table>
+    </form>
   </body>
   <script src="index.js"></script>
 </html>
