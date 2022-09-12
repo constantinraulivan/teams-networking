@@ -64,13 +64,27 @@ function submitForm(e) {
     });
 }
 
+function removeTeamRequest(id) {
+  return fetch("http://localhost:3000/teams-json/delete", {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ id: id }),
+  }).then((r) => r.json());
+}
 function initEvents() {
   const form = document.getElementById("editForm");
   form.addEventListener("submit", submitForm);
   form.querySelector("tbody").addEventListener("click", (e) => {
     if (e.target.matches("a.delete-btn")) {
       const id = e.target.getAttribute("data-id");
-      console.warn("click pe link", id);
+      const raspuns = removeTeamRequest(id).then((status) => {
+        console.warn("status", status);
+        if (status.success) {
+          loadTeams();
+        }
+      });
     }
   });
 }
