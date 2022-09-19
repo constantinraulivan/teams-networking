@@ -17,3 +17,11 @@ table tbody tr {
 table {
   margin-top: 20px;
 }
+
+input:not([type="image" i]) {
+  box-sizing: border-box;
+}
+
+#editForm tfoot input[type="text"] {
+  width: 100%;
+}
