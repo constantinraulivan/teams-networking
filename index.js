@@ -37,13 +37,16 @@ function loadTeams() {
 }
 
 function createTeamRequest(team) {
-  return fetch("http://localhost:3000/teams-json/create", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(team),
-  });
+  return fetch(
+    "http://localhost:3000/teams-json/create",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(team),
+    }.then((r) => r.json())
+  );
 }
 
 function getFormValues() {
@@ -74,16 +77,23 @@ function submitForm(e) {
   const team = getFormValues();
 
   if (editId) {
-    console.warn("pls edit", editId, team);
+    team.id = editId;
+    updateTeamRequest(team).then((status) => {
+      console.warn("status, status");
+      if (status.success) {
+        $("#editForm").reset();
+        loadTeams();
+      }
+    });
   } else {
-    createTeamRequest(team)
-      .then((r) => r.json())
-      .then((status) => {
-        console.warn("status", status);
-        if (status.success) {
-          location.reload();
-        }
-      });
+    createTeamRequest(team).then((status) => {
+      console.warn("status", status);
+      if (status.success) {
+        $("#editForm").reset();
+        loadTeams();
+        location.reload();
+      }
+    });
   }
 }
 
@@ -97,6 +107,16 @@ function removeTeamRequest(id) {
   }).then((r) => r.json());
 }
 
+function updateTeamRequest(team) {
+  return fetch("http://localhost:3000/teams-json/update", {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(team),
+  }).then((r) => r.json());
+}
+
 function startEditTeam(id) {
   const team = allTeams.find((team) => team.id === id);
   console.warn("edit", team);
@@ -105,8 +125,12 @@ function startEditTeam(id) {
 }
 
 function initEvents() {
-  const form = document.getElementById("editForm");
+  const form = $("#editForm");
   form.addEventListener("submit", submitForm);
+  form.addEventListener("reset", () => {
+    console.warn("reset");
+    editId = undefined;
+  });
 
   form.querySelector("tbody").addEventListener("click", (e) => {
     if (e.target.matches("a.delete-btn")) {
