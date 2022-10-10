@@ -28,7 +28,7 @@ function displayTeams(teams) {
 }
 
 function loadTeams() {
-  fetch("http://localhost:3000/teams-json")
+  fetch("http://localhost:3000/teams")
     .then((r) => r.json())
     .then((teams) => {
       allTeams = teams;
@@ -37,16 +37,13 @@ function loadTeams() {
 }
 
 function createTeamRequest(team) {
-  return fetch(
-    "http://localhost:3000/teams-json/create",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(team),
-    }.then((r) => r.json())
-  );
+  return fetch("http://localhost:3000/teams/create", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(team),
+  }).then((r) => r.json());
 }
 
 function getFormValues() {
@@ -98,7 +95,7 @@ function submitForm(e) {
 }
 
 function removeTeamRequest(id) {
-  return fetch("http://localhost:3000/teams-json/delete", {
+  return fetch("http://localhost:3000/teams/delete", {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
@@ -108,7 +105,7 @@ function removeTeamRequest(id) {
 }
 
 function updateTeamRequest(team) {
-  return fetch("http://localhost:3000/teams-json/update", {
+  return fetch("http://localhost:3000/teams/update", {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -125,6 +122,16 @@ function startEditTeam(id) {
 }
 
 function initEvents() {
+  $("#search").addEventListener("input", (e) => {
+    const search = e.target.value.toLowerCase();
+    console.info(search);
+    const teams = allTeams.filter((team) => {
+      return team.promotion.toLowerCase().includes(search);
+    });
+    console.info(teams);
+    displayTeams(teams);
+  });
+
   const form = $("#editForm");
   form.addEventListener("submit", submitForm);
   form.addEventListener("reset", () => {
