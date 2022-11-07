@@ -6,17 +6,17 @@ function $(selector) {
   return document.querySelector(selector);
 }
 
-function getTeamHTML(team) {
+function getTeamHTML({ id, url, promotion, members, name }) {
   return `  <tr>
-  <td>${team.promotion}</td>
-  <td>${team.members}</td>
-  <td>${team.name}</td>
+  <td>${promotion}</td>
+  <td>${members}</td>
+  <td>${name}</td>
   <td>
-    <a href="${team.url}" target="_blank">open</a>
+    <a href="${url}" target="_blank">open</a>
   </td>
   <td>
-    <a href="#" data-id="${team.id}" class="delete-btn">✖</a>
-    <a href="#" data-id="${team.id}" class="edit-btn">&#9998;</a>
+    <a href="#" data-id="${id}" class="delete-btn">✖</a>
+    <a href="#" data-id="${id}" class="edit-btn">&#9998;</a>
   </td>
 </tr>`;
 }
@@ -61,11 +61,11 @@ function getFormValues() {
   return team;
 }
 
-function setFormValues(team) {
-  $("input[name=promotion]").value = team.promotion;
-  $("input[name=members]").value = team.members;
-  $("input[name=name]").value = team.name;
-  $("input[name=url]").value = team.url;
+function setFormValues({ promotion, members, name, url }) {
+  $("input[name=promotion]").value = promotion;
+  $("input[name=members]").value = members;
+  $("input[name=name]").value = name;
+  $("input[name=url]").value = url;
 }
 
 function submitForm(e) {
@@ -83,9 +83,8 @@ function submitForm(e) {
       }
     });
   } else {
-    createTeamRequest(team).then(status => {
-      console.warn("status", status);
-      if (status.success) {
+    createTeamRequest(team).then(({ success }) => {
+      if (success) {
         $("#editForm").reset();
         loadTeams();
         location.reload();
